@@ -404,16 +404,6 @@ WHERE drone_id = (
     LIMIT 1
 );
 
-
-SELECT c.component_id, c.component_type, c.drone_id, c.usage_hours
-FROM Component c
-WHERE NOT EXISTS (
-    SELECT 1 FROM MaintenanceLog ml
-    WHERE ml.component_id = c.component_id
-      AND ml.maintenance_date >= DATE_SUB('2026-08-05', INTERVAL 60 DAY)
-);
-
-
 SELECT gz.zone_name, gz.zone_type, COUNT(*) AS violation_count
 FROM GeofenceViolation gv
 JOIN GeofenceZone gz ON gz.zone_id = gv.zone_id
