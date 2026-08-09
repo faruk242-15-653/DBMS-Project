@@ -337,20 +337,7 @@ BEGIN
 END //
 DELIMITER ;
 
---View1: component er health dekha jabe
-
-CREATE VIEW vw_ComponentHealth AS
-SELECT
-    c.component_id, c.component_type, c.usage_hours, c.status,
-    d.drone_name,
-    COUNT(ml.maintenance_id) AS times_serviced
-FROM Component c
-JOIN Drone d ON d.drone_id = c.drone_id
-LEFT JOIN MaintenanceLog ml ON ml.component_id = c.component_id
-GROUP BY c.component_id;
-
-
--- View 2: kon geofence zone ta kotobar violation hoyeche dekha jabe
+-- View : kon geofence zone ta kotobar violation hoyeche dekha jabe
 
 CREATE VIEW vw_ZoneRisk AS
 SELECT
